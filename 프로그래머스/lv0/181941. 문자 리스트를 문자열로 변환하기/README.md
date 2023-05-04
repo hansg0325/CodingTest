@@ -1,4 +1,4 @@
-# [unrated] 문자 리스트를 문자열로 변환하기 - 181941 
+# [level 0] 문자 리스트를 문자열로 변환하기 - 181941 
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181941) 
 
