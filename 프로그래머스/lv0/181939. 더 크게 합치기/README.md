@@ -1,4 +1,4 @@
-# [unrated] 더 크게 합치기 - 181939 
+# [level 0] 더 크게 합치기 - 181939 
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181939) 
 
