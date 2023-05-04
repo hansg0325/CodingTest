@@ -1,4 +1,4 @@
-# [unrated] 공배수 - 181936 
+# [level 0] 공배수 - 181936 
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181936) 
 
