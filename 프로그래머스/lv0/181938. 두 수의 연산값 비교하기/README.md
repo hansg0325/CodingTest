@@ -1,4 +1,4 @@
-# [unrated] 두 수의 연산값 비교하기 - 181938 
+# [level 0] 두 수의 연산값 비교하기 - 181938 
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181938) 
 
