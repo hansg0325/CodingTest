@@ -1,4 +1,4 @@
-# [unrated] 바탕화면 정리 - 161990 
+# [level 1] 바탕화면 정리 - 161990 
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/161990) 
 
