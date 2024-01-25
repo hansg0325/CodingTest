@@ -1,57 +1,66 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-  public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(st.nextToken());
+        int[] answer = new int[T];
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < T; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int N = Integer.parseInt(st.nextToken());
+            int[] ranks = new int[N];
+            Map<Integer, Integer> countMap = new HashMap<>();
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j = 0; j < N; j++) {
+                int data = Integer.parseInt(st.nextToken());
+                countMap.put(data, countMap.getOrDefault(data, 0) + 1);
+                ranks[j] = data;
+                max = Math.max(max, data);
+            }
 
-    int T = Integer.parseInt(br.readLine());
+            int[] fifthPlayer = new int[max + 1];
+            Map<Integer, Integer> scoreMap = new HashMap<>();
+            Map<Integer, Integer> tmpMap = new HashMap<>();
+            int score = 1;
 
-    for (int testCase = 0; testCase < T; testCase++){
-      int N = Integer.parseInt(br.readLine());
-      int[] rank = new int[N];
-      Map<Integer, Integer> result = new HashMap<>();
+            for (int rank : ranks) {
+                if (countMap.get(rank) == 6) {
+                    tmpMap.put(rank, tmpMap.getOrDefault(rank, 0) + 1);
 
-      StringTokenizer st = new StringTokenizer(br.readLine());
-      for (int i = 0; i < N; i++){
-        int data = Integer.parseInt(st.nextToken());
-        result.put(data, result.getOrDefault(data, 0) + 1);
-        rank[i] = data;
-      }
+                    if (tmpMap.get(rank) <= 4) {
+                        scoreMap.put(rank, scoreMap.getOrDefault(rank, 0) + score);
+                    }
 
-      int[] fifthGoalIdx = new int[result.size() + 1];
-      Map<Integer, Integer> scoreMap = new HashMap<>();
-      Map<Integer, Integer> tempMap = new HashMap<>();
-      int score = 1;
+                    if (tmpMap.get(rank) == 5) {
+                        fifthPlayer[rank] = score;
+                    }
 
-      for (int element: rank){
-        if (result.get(element) >= 6){
-          tempMap.put(element, tempMap.getOrDefault(element, 0) + 1);
+                    score++;
 
-          if (tempMap.get(element) <= 4){
-            scoreMap.put(element, scoreMap.getOrDefault(element, 0) + score);
-          }
-
-          if (tempMap.get(element) == 5){
-            fifthGoalIdx[element] = score;
-          }
-          score++;
+                }
+            }
+            int result = Integer.MAX_VALUE;
+            int fifthScore = Integer.MAX_VALUE;
+            for (Integer key : scoreMap.keySet()) {
+                int tmp = scoreMap.get(key);
+                if (tmp < result) {
+                    result = tmp;
+                    fifthScore = fifthPlayer[key];
+                    answer[i] = key;
+                } else if (tmp == result) {
+                    if (fifthScore > fifthPlayer[key]) {
+                        answer[i] = key;
+                    }
+                }
+            }
         }
-      }
-
-      List<Integer> keyData = new ArrayList<>(scoreMap.keySet());
-      keyData.sort((x, y) -> {
-        if (Objects.equals(scoreMap.get(x), scoreMap.get(y))){
-          return fifthGoalIdx[x] - fifthGoalIdx[y];
-        } else{
-          return scoreMap.get(x) - scoreMap.get(y);
+        for (int i : answer) {
+            System.out.println(i);
         }
-      });
-
-      System.out.println(keyData.get(0));
     }
-  }
 }
