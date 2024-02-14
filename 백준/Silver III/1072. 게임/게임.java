@@ -1,29 +1,28 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        int y = sc.nextInt();
-        int z = getPercent(x, y);
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        int ans = -1;
+        int X = Integer.parseInt(st.nextToken());
+        int Y = Integer.parseInt(st.nextToken());
+        int Z = (int) ((long) Y * 100 / X);
+        int answer = -1;
         int left = 0;
-        int right = (int) 1e9;
-        while (left <= right) {
+        int right = (int) 1e9; // 범위는 문제에서 주어짐
+        while (left <= right) { // left가 right를 넘어서면 종료
             int mid = (left + right) / 2;
-
-            if (getPercent(x + mid, y + mid) != z) {
-                ans = mid;
+            int newRate = (int) ((long) (Y + mid) * 100 / (X + mid));
+            if (newRate != Z) {
+                answer = mid;
                 right = mid - 1;
             } else {
                 left = mid + 1;
             }
         }
-        System.out.println(ans);
-    }
-
-    static int getPercent(int x, int y) {
-        return (int) ((long) y * 100 / x);
+        System.out.println(answer);
     }
 }
