@@ -33,31 +33,22 @@ public class Main {
             int startTeam = 0;
             int linkTeam = 0;
 
-//            for (int i = 0; i < N; i++) {
-//                if (selected[i]) {
-//                    for (int j = 0; j < N; j++) {
-//                        if (selected[j]) {
-//                            startTeam += players[i][j];
-//                        }
-//                    }
-//                } else {
-//                    for (int k = 0; k < N; k++) {
-//                        if (!selected[k]) {
-//                            linkTeam += players[i][k];
-//                        }
-//                    }
-//                }
-//            }
-
             for (int i = 0; i < N; i++) {
-                for (int j = 0; j < N; j++) {
-                    if (selected[i] && selected[j]) {
-                        startTeam += players[i][j];
-                    } else if (!selected[i] && !selected[j]) {
-                        linkTeam += players[i][j];
+                if (selected[i]) {
+                    for (int j = 0; j < N; j++) {
+                        if (selected[j]) {
+                            startTeam += players[i][j];
+                        }
+                    }
+                } else {
+                    for (int k = 0; k < N; k++) {
+                        if (!selected[k]) {
+                            linkTeam += players[i][k];
+                        }
                     }
                 }
             }
+            
          int diff = Math.abs(startTeam - linkTeam);
             answer = Math.min(answer, diff);
             return;
