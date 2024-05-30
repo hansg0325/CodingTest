@@ -9,12 +9,10 @@ public class Main {
 
 
         int n = Integer.parseInt(br.readLine());
-        
-        
+
+
         if (n == 0) {
             bw.write("0");
-        } else if (n == 1) {
-            bw.write("1");
         } else {
             BigInteger[] dp = new BigInteger[n + 1];
 
