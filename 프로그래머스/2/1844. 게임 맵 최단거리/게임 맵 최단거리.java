@@ -1,41 +1,42 @@
 import java.util.*;
 
 class Solution {
+    
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0, -1, 1};
+    static int[][] maps;
+    static int n, m;
     static int answer = -1;
     public int solution(int[][] maps) {
-        bfs(maps);
-        
+        this.maps = maps;
+        n = maps.length;
+        m = maps[0].length;
+        solution2();
         return answer;
     }
-    static void bfs(int[][] maps){
-        int n = maps.length;
-        int m = maps[0].length;
+    static void solution2(){
         Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{0, 0, 1});
-        boolean[][] visited = new boolean[n][m];
-        visited[0][0] = true;
-        int[] dx = {-1, 1, 0, 0};
-        int[] dy = {0, 0, -1, 1};
+        queue.add(new int[]{0, 0, 1});
         while(!queue.isEmpty()){
             int[] tmp = queue.poll();
             int x = tmp[0];
             int y = tmp[1];
             int count = tmp[2];
-            if(x == n-1 && y == m-1){ // 우측하단에 도착했을 경우
+            if(x == n-1 && y == m-1){
                 answer = count;
-                return;
+                break;
             }
-            for(int i=0;i<4;i++) {
+            for(int i=0;i<4;i++){
                 int nx = x + dx[i];
                 int ny = y + dy[i];
-                if(nx>=0&&nx<n&&ny>=0&&ny<m){
-                    if(!visited[nx][ny] && maps[nx][ny] == 1){
-                        queue.offer(new int[]{nx, ny, count+1});
-                        visited[nx][ny] = true;
+                if(nx>=0 && nx<n && ny >=0 && ny<m){
+                    if(maps[nx][ny] == 1){
+                        maps[nx][ny] = 2;
+                        queue.add(new int[]{nx, ny, count+1});
                     }
                 }
             }
         }
-        return;
+
     }
 }
